@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Ryan Porter&#39;s IT Resume</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on Ryan Porter&#39;s IT Resume</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Copyright 2023 Ryan Porter</copyright>
+    <lastBuildDate>Tue, 14 Nov 2023 11:18:42 -0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Welcome</title>
+      <link>/posts/welcome/</link>
+      <pubDate>Tue, 14 Nov 2023 11:18:42 -0800</pubDate>
+      
+      <guid>/posts/welcome/</guid>
+      <description>Welcome! This is a work-in-progress blog that I am practicing and showcasing my ability to use Microsoft Azure. Please feel free to take a look around, but keep in mind that this is a preliminary version that isn&amp;rsquo;t quite ready yet.</description>
+      <content>&lt;h1 id=&#34;welcome&#34;&gt;Welcome!&lt;/h1&gt;
+&lt;p&gt;This is a work-in-progress blog that I am practicing and showcasing my ability to use Microsoft Azure. Please feel free to take a look around, but keep in mind that this is a preliminary version that isn&amp;rsquo;t quite ready yet.&lt;/p&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>

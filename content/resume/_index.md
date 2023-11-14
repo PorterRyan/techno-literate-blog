@@ -7,7 +7,7 @@ draft = true
 
 {{< center >}} # Ryan Porter {{< /center >}}
 
-{{< center >}} [porterryann@gmail.com](mailto:porterryann@gmail.com) | [LinkedIn](https://linkedin.com/in/ryaninthewoods) | [GitHub](https://github.com/PorterRyan) {{< /center >}}
+{{< center >}}[LinkedIn](https://linkedin.com/in/ryaninthewoods) | [GitHub](https://github.com/PorterRyan) {{< /center >}}
 
 ## Education
 **B.S. Applied Technology**  

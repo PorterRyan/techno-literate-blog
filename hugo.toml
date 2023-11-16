@@ -5,6 +5,7 @@ title = "Ryan Porter's IT Resume"
 # Remove it if you use the theme as a remote Hugo Module.
 theme = "terminal"
 paginate = 5
+relativeURLs = true
 
 [params]
   # dir name of your main content (default is `content/posts`).

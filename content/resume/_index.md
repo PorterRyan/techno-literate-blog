@@ -2,7 +2,7 @@
 title = 'Resume'
 updated = 2023-10-17T14:31:40-07:00
 theme = 'terminal'
-draft = true
+draft = false
 +++
 
 {{< center >}} # Ryan Porter {{< /center >}}

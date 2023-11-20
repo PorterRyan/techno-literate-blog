@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   build-hugo:
-    runs-on: ubuntu-latest
+    runs-on: 'ubuntu-latest'
 	  concurrency:
 		  group: ${{ github.workflow }}-${{ github.ref }}
     steps:

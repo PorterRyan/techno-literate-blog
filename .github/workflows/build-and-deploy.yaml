@@ -6,8 +6,8 @@ on:
 jobs:
   build-hugo:
     runs-on: 'ubuntu-latest'
-	  concurrency:
-		  group: ${{ github.workflow }}-${{ github.ref }}
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - name: Git Checkout
         uses: actions/checkout@v4

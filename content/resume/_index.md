@@ -31,21 +31,22 @@ Brigham Young University-Idaho | Rexburg, ID
 ## Selected Professional Experience  
 **Technical Intern, Network Operations Center** | The Church of Jesus Christ of Latter-day Saints | Remote  
 _August 2023 - Present_  
-- Resolve or escalate monitoring alerts for over 8,400 network devices worldwide
-- Consult local stakeholders at over 550 sites on six continents
-- Troubleshoot Cisco IOS and Meraki devices ensuring continuous access at business-critical locations
+- Resolved or escalatd monitoring alerts for over 8,400 network devices worldwide using ServiceNow
+- Consulted local stakeholders at over 550 sites on six continents
+- Troubleshot Cisco IOS and Meraki devices ensuring continuous access at business-critical locations
+- Triaged incidents by impact and urgency to determine SLA priority levels
 
 **Visitor Service Aide** | Friends of Santa Cruz State Parks | Santa Cruz, CA  
 _April 2021 - Present_  
 - Designed a Python application to automate reservation tracking in Excel
-- Educate hundreds of visitors about local flora and fauna
-- Recommend hikes tailored to visitors' abilities
-- Manage a busy 55-site campground with over 500 campers (in season)
+- Educated hundreds of visitors about local flora and fauna
+- Recommended hikes tailored to visitors' abilities
+- Managed a busy 55-site campground with over 500 campers (in season)
 
 **Technology Consultant** | Ryan Porter Computer Services | Boulder Creek, CA  
 _July 2018 - September 2023_  
 - Solved client problems remotely using Zoho Assist remote access software
-- Recovered and backed up data
+- Recovered and backed up data from malfunctioning and decommissioned computers
 - Upgraded workstation and laptop hardware (RAM, disks, power supplies)
 - Resolved printer network connectivity via Ethernet and WiFi for over 20 local clients
 

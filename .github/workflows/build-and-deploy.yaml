@@ -49,7 +49,7 @@ jobs:
     - name: 'Terraform Format'
       uses: hashicorp/terraform-github-actions@master
       with:
-        tf_actions_verson: 'latest'
+        tf_actions_version: 'latest'
         tf_actions_subcommand: 'fmt'
         tf_actions_working_dir: "./terraform"
     

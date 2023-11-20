@@ -26,7 +26,7 @@ jobs:
 
       - name: Release Assets
         uses: peaceiris/actions-gh-pages@v3
-		if: github.ref == 'refs/heads/main'
+		    if: github.ref == 'refs/heads/main'
         with:
           personal_token: ${{ secrets.TOKEN }}
           publish_dir: ./public

@@ -46,41 +46,44 @@ jobs:
         shell: bash
   
     steps:
-    - name: 'Terraform Format'
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 'latest'
-        tf_actions_subcommand: 'fmt'
-        tf_actions_working_dir: "./terraform"
+      - name: Checkout
+        uses: actions/checkout@v2
     
-    - name: 'Terraform Init'
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 'latest'
-        tf_actions_subcommand: 'validate'
-        tf_actions_working_dir: "./terraform"
+      - name: 'Terraform Format'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 'latest'
+          tf_actions_subcommand: 'fmt'
+          tf_actions_working_dir: "./terraform"
     
-    - name: 'Terraform Validate'
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 'latest'
-        tf_actions_subcommand: 'plan'
-        tf_actions_working_dir: "./terraform"
+      - name: 'Terraform Init'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 'latest'
+          tf_actions_subcommand: 'validate'
+          tf_actions_working_dir: "./terraform"
     
-    - name: 'Terraform Plan'
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 'latest'
-        tf_actions_subcommand: 'plan'
-        tf_actions_working_dir: "./terraform"
+      - name: 'Terraform Validate'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 'latest'
+          tf_actions_subcommand: 'plan'
+          tf_actions_working_dir: "./terraform"
     
-    - name: 'Terraform Apply'
-      if: github.ref == 'refs/heads/main'
-      uses: hashicorp/terraform-github-actions@master
-      with: 
-        tf_actions_version: 'latest'
-        tf_actions_subcommand: 'apply'
-        tf_actions_working_dir: "./terraform"
+      - name: 'Terraform Plan'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 'latest'
+          tf_actions_subcommand: 'plan'
+          tf_actions_working_dir: "./terraform"
+    
+      - name: 'Terraform Apply'
+        if: github.ref == 'refs/heads/main'
+        uses: hashicorp/terraform-github-actions@master
+        with: 
+          tf_actions_version: 'latest'
+          tf_actions_subcommand: 'apply'
+          tf_actions_working_dir: "./terraform"
 
   upload-files:
     runs-on: ubuntu-latest

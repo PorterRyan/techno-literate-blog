@@ -9,8 +9,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - name: Git Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 		with:
 			submodules: true
 			fetch-depth: 0

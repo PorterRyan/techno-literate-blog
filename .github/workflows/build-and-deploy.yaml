@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
+    permissions:
+      contents: write
     steps:
       - name: Git Checkout
         uses: actions/checkout@v4
@@ -15,8 +17,6 @@ jobs:
           submodules: true
           fetch-depth: 0
           token: ${{ secrets.TOKEN }}
-          permissions:
-            contents: write
            
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2

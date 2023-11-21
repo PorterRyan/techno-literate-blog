@@ -112,3 +112,15 @@ jobs:
       - name: Dispose Azure Service Principal Session
         run: |
           az logout
+
+  cypress-run:
+    name: Cypress run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          spec: cypress/e2e/spec.cy.js

@@ -120,6 +120,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        
+      - name: Install Yarn
+        run: yarn install
 
       - name: Cypress run
         uses: cypress-io/github-action@v6

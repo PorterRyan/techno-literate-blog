@@ -1,4 +1,4 @@
-resource "azurerm_resource_group" "main" {
+resource "azurerm_resource_group" "res-0" {
   location = "westus2"
   name     = "production_storage"
 }

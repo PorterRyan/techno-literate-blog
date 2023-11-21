@@ -99,7 +99,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            az storage blob upload-batch -d "\$web" -s ././public --connection-string "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" --overwrite true
+            az storage blob upload-batch -d "\$web" -s ../../public --connection-string "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" --overwrite true
                        
       - name: Purge Azure CDN Resources
         run:

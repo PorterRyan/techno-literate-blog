@@ -1,19 +1,4 @@
-terraform {
-  backend "azurerm" {
-    resource_group_name  = "prodopstfstates"
-    storage_account_name = "prodopstf"
-    container_name       = "tfstatedevops"
-    key                  = "production_storage.tfstate"
-  }
-}
- 
-provider "azurerm" {
-  features {}
-}
- 
-data "azurerm_client_config" "current" {}
-
-resource "azurerm_resource_group" "res-0" {
+resource "azurerm_resource_group" "main" {
   location = "westus2"
   name     = "production_storage"
 }

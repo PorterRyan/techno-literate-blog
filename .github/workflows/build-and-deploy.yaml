@@ -115,6 +115,7 @@ jobs:
 
   cypress-run:
     name: Cypress run
+    needs: upload-files
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

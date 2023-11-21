@@ -1,0 +1,18 @@
+{
+  "name": "resume",
+  "version": "1.0.0",
+  "description": "Cloud Resume Challenge",
+  "main": "default.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ".git"
+  },
+  "author": "Ryan Porter",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.6.0"
+  }
+}

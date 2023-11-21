@@ -116,7 +116,7 @@ jobs:
   cypress-run:
     name: Cypress run
     needs: upload-files
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -124,4 +124,5 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
+          build: npx cypress info
           spec: cypress/e2e/spec.cy.js

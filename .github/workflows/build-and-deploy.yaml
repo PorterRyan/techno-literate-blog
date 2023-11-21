@@ -116,13 +116,20 @@ jobs:
   cypress-run:
     name: Cypress run
     needs: upload-files
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node:version: '16'
+      
+      - name: Install dependencies
+        run: npm install
       
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          build: npx cypress info
           spec: cypress/e2e/spec.cy.js

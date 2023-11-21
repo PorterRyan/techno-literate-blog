@@ -98,6 +98,7 @@ jobs:
       - name: Upload Assets To Azure Blob Storage
         uses: azure/CLI@v1
         with:
+        working-directory: .
           inlineScript: |
             az storage blob upload-batch -d "\$web" -s public --connection-string "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" --overwrite true
                        

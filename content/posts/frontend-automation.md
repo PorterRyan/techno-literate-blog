@@ -6,7 +6,7 @@ authorTwitter = "" #do not include @
 cover = ""
 tags = ["azure", "GitHub", "ci/cd"]
 keywords = ["", ""]
-description = ""
+description = "I've completed the DevOps mod for Chunk 1 of the Cloud Resume Challenge. I've learned so much, especially that there are still things I don't know, and I'm excited to continue this project and learn a lot more!"
 showFullContent = false
 readingTime = true
 hideComments = false
@@ -15,17 +15,17 @@ draft = false
 +++
 # Frontend Automation
 
-I've completed the DevOps mod for Chunk 1 of the Cloud Resume Challenge. I've learned so much, especially that there are still things I don't know. I'm excited to continue this project and learn a lot more!
+I've completed the DevOps mod for Chunk 1 of the Cloud Resume Challenge. I've learned so much, especially that there are still things I don't know, and I'm excited to continue this project and learn a lot more!
 
 Here is what I accomplished in this chunk:
 
 1. I created a static website using the [Hugo static site generator](https://gohugo.io).
 2. I hosted the site using [Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction) and [Azure CDN](https://learn.microsoft.com/en-us/azure/frontdoor/).
 3. I created a basic workflow using [GitHub Actions](https://github.com/features/actions), including:
-   - Building the Hugo static site each time I push a change to my repository,
    - Deploy Azure infrastructure using Terraform,
-   - Uploading new website files to Azure Storage, and
-   - Clearing the Azure CDN cache.
+   - Build the Hugo static site each time I push a change to my repository,
+   - Upload the new website files to Azure Storage, and
+   - Clear the Azure CDN cache.
 4. I built a simple test battery using Cypress and appended it to the GitHub Actions workflow.
 
 ## Challenges
@@ -63,33 +63,7 @@ on:
     branches:
       - main
 jobs:
-  build-hugo:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Git Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-          fetch-depth: 0
-          token: ${{ secrets.TOKEN }}
-           
-      - name: Setup Hugo
-        env:
-          HUGO_VERSION: 0.120.4
-        run: |
-          mkdir ~/hugo
-          cd ~/hugo
-          curl -L "https://github.com/gohugoio/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz" --output hugo.tar.gz
-          tar -xvzf hugo.tar.gz
-          sudo mv hugo /usr/local/bin
-      - name: Setup Dependencies
-        run: npm i
 
-      - name: Build Site
-        run: hugo --minify -d ./public
-      
   terraform:
     name: 'Terraform'
     env:
@@ -99,7 +73,6 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.AZURE_TF_TENANT_ID }}
       TF_VERSION: 1.6.4
     runs-on: ubuntu-latest
-    needs: build-hugo
     environment: production
   
     defaults:
@@ -141,14 +114,36 @@ jobs:
         id: apply
         run: terraform apply -auto-approve -var-file="variables.tfvars"
 
-  upload-files:
-    env:
-      WORKING_DIRECTORY: .
+  build-hugo:
     runs-on: ubuntu-latest
-    needs: [build-hugo, terraform]
+    needs: terraform
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    permissions:
+      contents: write
     steps:
-      - name: Checkout
+      - name: Git Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+          token: ${{ secrets.TOKEN }}
+           
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Build Project
+        run: hugo --minify
+
+      - name: Release Assets
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          personal_token: ${{ secrets.TOKEN }}
+          publish_dir: ./public
 
       - name: Azure Login
         uses: azure/login@v1.1
@@ -168,10 +163,10 @@ jobs:
       - name: Dispose Azure Service Principal Session
         run: |
           az logout
-  
+      
   cypress-run:
     name: Cypress run
-    needs: upload-files
+    needs: build-hugo
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

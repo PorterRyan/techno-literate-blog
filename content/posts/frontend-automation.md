@@ -11,7 +11,7 @@ showFullContent = false
 readingTime = true
 hideComments = false
 color = "" #color from the theme settings
-draft = true
+draft = false
 +++
 # Frontend Automation
 
@@ -91,7 +91,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         with:
           personal_token: ${{ secrets.TOKEN }}
-          publish_dir: ./public
+          publish_dir: public
       
   terraform:
     name: 'Terraform'

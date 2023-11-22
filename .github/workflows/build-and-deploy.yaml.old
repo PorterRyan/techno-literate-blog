@@ -4,7 +4,33 @@ on:
     branches:
       - main
 jobs:
+  build-hugo:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+          token: ${{ secrets.TOKEN }}
+           
+      - name: Setup Hugo
+        env:
+          HUGO_VERSION: 0.120.4
+        run: |
+          mkdir ~/hugo
+          cd ~/hugo
+          curl -L "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz" --output hugo.tar.gz
+          tar -xvzf hugo.tar.gz
+          sudo mv hugo /usr/local/bin
+      - name: Setup Dependencies
+        run: npm i
 
+      - name: Build Site
+        run: hugo --minify -d ./public
+      
   terraform:
     name: 'Terraform'
     env:
@@ -56,36 +82,14 @@ jobs:
         id: apply
         run: terraform apply -auto-approve -var-file="variables.tfvars"
 
-  build-hugo:
+  upload-files:
+    env:
+      WORKING_DIRECTORY: .
     runs-on: ubuntu-latest
-    needs: terraform
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-    permissions:
-      contents: write
+    needs: [build-hugo, terraform]
     steps:
-      - name: Git Checkout
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: true
-          fetch-depth: 0
-          token: ${{ secrets.TOKEN }}
-           
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
-          extended: true
-
-      - name: Build Project
-        run: hugo --minify
-
-      - name: Release Assets
-        uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
-        with:
-          personal_token: ${{ secrets.TOKEN }}
-          publish_dir: ./public
 
       - name: Azure Login
         uses: azure/login@v1.1
@@ -105,10 +109,10 @@ jobs:
       - name: Dispose Azure Service Principal Session
         run: |
           az logout
-      
+  
   cypress-run:
     name: Cypress run
-    needs: build-hugo
+    needs: upload-files
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

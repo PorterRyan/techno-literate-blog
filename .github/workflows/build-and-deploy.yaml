@@ -83,7 +83,7 @@ jobs:
     
       - name: Terraform apply
         id: apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -var-file="variables.tfvars"
 
   upload-files:
     env:

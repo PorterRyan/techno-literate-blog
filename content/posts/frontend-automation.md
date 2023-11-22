@@ -91,6 +91,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         with:
           personal_token: ${{ secrets.TOKEN }}
+          publish_branch: main
           publish_dir: public
       
   terraform:

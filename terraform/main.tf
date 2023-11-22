@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "res-0" {
 }
 resource "azurerm_cdn_endpoint_custom_domain" "res-1" {
   cdn_endpoint_id = var.endpoint_id
-  host_name       = "var.domain_name"
+  host_name       = var.domain_name
   name            = "resume-techno-literate-com"
   cdn_managed_https {
     certificate_type = "Dedicated"
@@ -23,7 +23,7 @@ resource "azurerm_storage_account" "res-3" {
   name                             = "tlprodstore"
   resource_group_name              = "production_storage"
   custom_domain {
-    name = var.domain_name
+    name = "resume.techno-literate.com"
   }
   static_website {
     error_404_document = "404.html"

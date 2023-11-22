@@ -5,3 +5,6 @@ domain_name = "resume.techno-literate.com"
 endpoint_origin_hostname = "tlprodstore.z5.web.core.windows.net"
 
 endpoint_origin_name = "default-origin-37836f6a"
+
+state_storage_account_name = "prodopstf"
+state_resource_group_name = "prodopstfstates"

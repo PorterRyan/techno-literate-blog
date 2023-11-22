@@ -4,8 +4,8 @@ provider "azurerm" {
 
 terraform {
   backend "azurerm" {
-    resource_group_name  = var.state_resource_group_name
-    storage_account_name = var.state_storage_account_name
+    resource_group_name  = "prodopstfstates"
+    storage_account_name = "prodopstf"
     container_name       = "tfstatedevops"
     key                  = "production_storage.tfstate"
   }

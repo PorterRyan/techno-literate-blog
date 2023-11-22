@@ -17,3 +17,13 @@ variable "endpoint_origin_name" {
   description = "Value of the name of the CDN endpoint origin"
   type = string
 }
+
+variable "state_storage_account_name" {
+  description = "Value of the name of the storage account where the TFSTATE file is"
+  type = string
+}
+
+variable "state_resource_group_name" {
+  description = "Value of the name of the resource group containing the storage account where the TFSTATE file is"
+  type = string
+}

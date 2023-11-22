@@ -1,6 +1,6 @@
 +++
 title = "Frontend Automation"
-date = "2023-11-21T07:50:16-08:00"
+date = "2023-11-22"
 author = "Ryan Porter"
 authorTwitter = "" #do not include @
 cover = ""
@@ -11,7 +11,7 @@ showFullContent = false
 readingTime = true
 hideComments = false
 color = "" #color from the theme settings
-draft = true
+draft = false
 +++
 # Frontend Automation
 
@@ -55,6 +55,213 @@ I'm very proud of myself for getting through this chunk, and especially for tack
 
 **Here is the most important code from this chunk.**
 
-```json
+#### Github Actions workflow
+```yaml
+name: CI/CD Release Pipeline
+on: 
+  push:
+    branches:
+      - main
+jobs:
+  build-hugo:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    permissions:
+      contents: write
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+          token: ${{ secrets.TOKEN }}
+           
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
 
+      - name: Build Project
+        run: hugo --minify
+
+      - name: Release Assets
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          personal_token: ${{ secrets.TOKEN }}
+          publish_dir: ./public
+      
+  terraform:
+    name: 'Terraform'
+    env:
+      ARM_CLIENT_ID: ${{ secrets.AZURE_TF_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_TF_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TF_TENANT_ID }}
+      TF_VERSION: 1.6.4
+    runs-on: ubuntu-latest
+    needs: build-hugo
+    environment: production
+  
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
+  
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+    
+      - name: 'Setup Terraform'
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+    
+      - name: 'Terraform fmt'
+        id: fmt
+        run: terraform fmt -check
+    
+      - name: 'Terraform init'
+        id: init
+        run: |
+          set -a
+          source ../.env.backend
+          terraform init \
+            -backend-config="resource_group_name=$TF_VAR_state_resource_group_name" \
+            -backend-config="storage_account_name=$TF_VAR_state_storage_account_name"
+
+      - name: Terraform validate
+        id: validate
+        run: terraform validate -no-color
+    
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -var-file="variables.tfvars"
+    
+      - name: Terraform apply
+        id: apply
+        run: terraform apply -auto-approve
+
+  upload-files:
+    env:
+      WORKING_DIRECTORY: .
+    runs-on: ubuntu-latest
+    needs: [build-hugo, terraform]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Azure Login
+        uses: azure/login@v1.1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: Upload to Azure Storage
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az storage blob upload-batch -d "\$web" -s ./public --connection-string "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" --overwrite true
+                       
+      - name: Purge Azure CDN Resources
+        run:
+          az cdn endpoint purge -n ${{ secrets.AZURE_CDN_ENDPOINT }} --profile-name ${{ secrets.AZURE_CDN_PROFILE_NAME }} --content-paths "/*" --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --no-wait
+             
+      - name: Dispose Azure Service Principal Session
+        run: |
+          az logout
+  
+  cypress-run:
+    name: Cypress run
+    needs: upload-files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+```
+#### Terraform Configuration
+```json
+resource "azurerm_resource_group" "res-0" {
+  location = "westus2"
+  name     = "production_storage"
+}
+resource "azurerm_cdn_endpoint_custom_domain" "res-1" {
+  cdn_endpoint_id = var.endpoint_id
+  host_name       = var.domain_name
+  name            = "resume-techno-literate-com"
+  cdn_managed_https {
+    certificate_type = "Dedicated"
+    protocol_type    = "ServerNameIndication"
+  }
+  depends_on = [
+    azurerm_cdn_endpoint.res-10,
+  ]
+}
+resource "azurerm_storage_account" "res-3" {
+  account_replication_type         = "LRS"
+  account_tier                     = "Standard"
+  allow_nested_items_to_be_public  = false
+  cross_tenant_replication_enabled = false
+  location                         = "westus2"
+  name                             = "tlprodstore"
+  resource_group_name              = "production_storage"
+  custom_domain {
+    name = "resume.techno-literate.com"
+  }
+  static_website {
+    error_404_document = "404.html"
+    index_document     = "index.html"
+  }
+}
+resource "azurerm_storage_container" "res-5" {
+  name                 = "$web"
+  storage_account_name = "tlprodstore"
+}
+resource "azurerm_cdn_profile" "res-9" {
+  location            = "global"
+  name                = "technoliterate-cdn"
+  resource_group_name = "production_storage"
+  sku                 = "Standard_Microsoft"
+}
+resource "azurerm_cdn_endpoint" "res-10" {
+  is_compression_enabled = true
+  location               = "global"
+  name                   = "techno-literate-cdn"
+  origin_host_header     = var.endpoint_origin_hostname
+  profile_name           = "technoliterate-cdn"
+  resource_group_name    = "production_storage"
+  origin {
+    host_name = var.endpoint_origin_hostname
+    name      = var.endpoint_origin_name
+  }
+  depends_on = [
+    azurerm_cdn_profile.res-9,
+  ]
+}
+```
+#### Cypress Tests
+```javascript
+describe('Sitemap Test', () => {
+  let urls = [];
+
+  before(async () => {
+    const response = await cy.request('https://resume.techno-literate.com/sitemap.xml');
+
+    urls = Cypress.$(response.body).find('loc').toArray().map(el => el.innerText);
+  })
+
+  it('should load each page successfully', () => {
+    urls.forEach(cy.visit);
+  });
+});
+
+describe('CSS test', () => {
+  it('should have CSS', () => {
+    cy.visit('https://resume.techno-literate.com/').get('.blue').should('have.css','background-color','rgb(29, 33, 44)');
+  });
+});
 ```

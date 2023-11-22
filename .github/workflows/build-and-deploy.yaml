@@ -34,6 +34,7 @@ jobs:
           personal_token: ${{ secrets.TOKEN }}
           publish_branch: main
           publish_dir: public
+          destination_dir: public
       
   terraform:
     name: 'Terraform'

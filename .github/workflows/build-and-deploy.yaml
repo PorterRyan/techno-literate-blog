@@ -19,20 +19,19 @@ jobs:
           token: ${{ secrets.TOKEN }}
            
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
-          extended: true
+        env:
+          HUGO_VERSION: 0.120.4
+        run: |
+          mkdir ~/hugo
+          cd ~/hugo
+          curl -L "https://github.com/gohugoio/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz" --output hugo.tar.gz
+          tar -xvzf hugo.tar.gz
+          sudo mv hugo /usr/local/bin
+      - name: Setup Dependencies
+        run: npm i
 
-      - name: Build Project
-        run: hugo --minify
-
-      - name: Release Assets
-        uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
-        with:
-          personal_token: ${{ secrets.TOKEN }}
-          publish_dir: ./public
+      - name: Build Site
+        run: hugo --minify -d ./public
       
   terraform:
     name: 'Terraform'

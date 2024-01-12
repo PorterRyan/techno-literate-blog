@@ -13,8 +13,6 @@ hideComments = false
 color = "" #color from the theme settings
 draft = false
 +++
-# Frontend Automation
-
 I've completed the DevOps mod for Chunk 1 of the Cloud Resume Challenge. I've learned so much, especially that there are still things I don't know, and I'm excited to continue this project and learn a lot more!
 
 Here is what I accomplished in this chunk:

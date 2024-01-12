@@ -16,7 +16,7 @@ Brigham Young University-Idaho | Rexburg, ID | Graduating July 2024
 **A.A.S Applied Technology**  
 Brigham Young University-Idaho | Rexburg, ID | April 2022
 
-**Certificates:** Computer Support & Computer Programming  
+**Certificates:** Computer Support, Computer Programming, and System Administration
 Brigham Young University-Idaho | Rexburg, ID
 
 ---

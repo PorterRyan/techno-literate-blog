@@ -30,7 +30,7 @@ Brigham Young University-Idaho | Rexburg, ID
 
 ## Selected Professional Experience  
 **Technical Intern, Network Operations Center** | The Church of Jesus Christ of Latter-day Saints | Remote  
-_August 2023 - Present_  
+_August 2023 - December 2023_  
 - Resolved or escalatd monitoring alerts for over 8,400 network devices worldwide using ServiceNow
 - Consulted local stakeholders at over 550 sites on six continents
 - Troubleshot Cisco IOS and Meraki devices ensuring continuous access at business-critical locations

@@ -39,24 +39,23 @@ _August 2023 - December 2023_
 **Visitor Service Aide** | Friends of Santa Cruz State Parks | Santa Cruz, CA  
 _April 2021 - Present_  
 - Designed a Python application to automate reservation tracking in Excel
+- Managed a busy 55-site campground with over 500 campers (in season)
 - Educated hundreds of visitors about local flora and fauna
 - Recommended hikes tailored to visitors' abilities
-- Managed a busy 55-site campground with over 500 campers (in season)
 
 **Technology Consultant** | Ryan Porter Computer Services | Boulder Creek, CA  
 _July 2018 - September 2023_  
+- Resolved printer network connectivity via Ethernet and WiFi for over 20 local clients
 - Solved client problems remotely using Zoho Assist remote access software
 - Recovered and backed up data from malfunctioning and decommissioned computers
 - Upgraded workstation and laptop hardware (RAM, disks, power supplies)
-- Resolved printer network connectivity via Ethernet and WiFi for over 20 local clients
 
 ---
 
 ## Ongoing Projects and Interests  
-- Homelab running virtualized services: Nextcloud, Active Directory Domain, DocuWiki
+- Homelab running virtualized services including Nextcloud and Active Directory
 - Programming with Python, HTML/CSS, JavaScript
 - Cloud Resume Project on Microsoft Azure services
-- Digital radio operations with APRS and Packet Winlink 
 
 ---
 
@@ -66,6 +65,6 @@ _July 2018 - September 2023_
 - Continuously train and maintain personal readiness for last-minute activation
 - Retain Disaster Service Worker credentials for Santa Cruz County  
 
-**Elders Quorum President** | The Church of Jesus Christ of Latter-day Saints  
-- Administer a men's group with over 40 young adult members
-- Teach month Sunday School classes on religious topics
+**Second Counselor, Branch Presidency** | The Church of Jesus Christ of Latter-day Saints  
+- Assistant to Branch President
+- Conduct religious services on rotation

@@ -41,7 +41,7 @@ resource "azurerm_cdn_profile" "res-9" {
   sku                 = "Standard_Microsoft"
 }
 resource "azurerm_cdn_endpoint" "res-10" {
-  is_compression_enabled = true
+  is_compression_enabled = false
   location               = "global"
   name                   = "techno-literate-cdn"
   origin_host_header     = var.endpoint_origin_hostname

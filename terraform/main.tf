@@ -34,16 +34,17 @@ resource "azurerm_storage_container" "res-5" {
   name                 = "$web"
   storage_account_name = "tlprodstore"
 }
-resource "azurerm_cdn_profile" "res-9" {
+resource "azurerm_cdn_frontdoor_profile" "res-9" {
+  id                  = var.frontdoor_profile_id
   location            = "global"
   name                = "technoliterate-cdn"
   resource_group_name = "production_storage"
-  sku                 = "Standard_Microsoft"
+  sku                 = "Standard_AzureFrontDoor"
 }
-resource "azurerm_cdn_endpoint" "res-10" {
+resource "azurerm_cdn_frontdoor_endpoint" "res-10" {
   is_compression_enabled = false
   location               = "global"
-  name                   = "techno-literate-cdn"
+  name                   = var.frontdoor_endpoint_name
   origin_host_header     = var.endpoint_origin_hostname
   profile_name           = "technoliterate-cdn"
   resource_group_name    = "production_storage"
@@ -52,6 +53,6 @@ resource "azurerm_cdn_endpoint" "res-10" {
     name      = var.endpoint_origin_name
   }
   depends_on = [
-    azurerm_cdn_profile.res-9,
+    azurerm_cdn_frontdoor_profile.res-9,
   ]
 }

@@ -8,3 +8,5 @@ endpoint_origin_name = "default-origin-37836f6a"
 
 state_storage_account_name = "prodopstf"
 state_resource_group_name  = "prodopstfstates"
+frontdoor_profile_id = "f6d879e3-60da-4c7b-9a03-d07395764e2c"
+frontdoor_endpoint_name = "techno-literate-cdn-fee7csfnejgth5hj.z01.azurefd.net"

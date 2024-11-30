@@ -1,12 +1,3 @@
-endpoint_id = "/subscriptions/fcb20762-8b8f-4e0a-8d02-28913debf2d2/resourceGroups/production_storage/providers/Microsoft.Cdn/profiles/technoliterate-cdn/endpoints/techno-literate-cdn"
-
-domain_name = "resume.techno-literate.com"
-
-endpoint_origin_hostname = "tlprodstore.z5.web.core.windows.net"
-
-endpoint_origin_name = "default-origin-37836f6a"
-
+domain_name = "www.techno-literate.com"
 state_storage_account_name = "prodopstf"
 state_resource_group_name  = "prodopstfstates"
-frontdoor_profile_id = "f6d879e3-60da-4c7b-9a03-d07395764e2c"
-frontdoor_endpoint_name = "techno-literate-cdn-fee7csfnejgth5hj.z01.azurefd.net"

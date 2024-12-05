@@ -49,11 +49,11 @@ jobs:
     
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color -var-file="variables.tfvars"
+        run: terraform plan -no-color # -var-file="variables.tfvars"
     
       - name: Terraform apply
         id: apply
-        run: terraform apply -auto-approve -var-file="variables.tfvars"
+        run: terraform apply -auto-approve # -var-file="variables.tfvars"
 
   build-hugo:
     runs-on: ubuntu-latest

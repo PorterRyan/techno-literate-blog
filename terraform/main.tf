@@ -27,6 +27,12 @@ resource "azurerm_storage_account" "res-1" {
     azurerm_resource_group.res-0,
   ]
 }
+
+import {
+  to = "azurerm_storage_container.res-3"
+  id = "https://tlprodstore.z5.web.core.windows.net/$web"
+}
+
 resource "azurerm_storage_container" "res-3" {
   name                 = "$web"
   storage_account_name = "tlprodstore"

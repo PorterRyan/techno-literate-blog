@@ -29,7 +29,7 @@ resource "azurerm_storage_account" "res-1" {
 }
 
 import {
-  to = "azurerm_storage_container.res-3"
+  to = azurerm_storage_container.res-3
   id = "https://tlprodstore.z5.web.core.windows.net/$web"
 }
 

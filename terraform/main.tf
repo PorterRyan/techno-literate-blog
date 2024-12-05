@@ -10,18 +10,35 @@ resource "azurerm_storage_account" "res-1" {
   location                         = azurerm_resource_group.res-0.location
   name                             = "tlprodstore"
   resource_group_name              = azurerm_resource_group.res-0.name
+  
+  /*custom_domain {
+    name = "www.techno-literate.com"
+  }*/
+
   custom_domain {
     name = "www.techno-literate.com"
+  #  use_subdomain = true
   }
+
   static_website {
     error_404_document = "404.html"
     index_document     = "index.html"
   }
   depends_on = [
     azurerm_resource_group.res-0,
+    cloudflare_record.domain_asverify
   ]
 }
 resource "azurerm_storage_container" "res-3" {
   name                 = "$web"
   storage_account_name = "tlprodstore"
+}
+
+resource "cloudflare_record" "domain_asverify" {
+  zone_id = var.dnszone
+  name    = "asverify.www"
+  comment = "Terraform: Azure Custom Domain Verify"
+  value   = "asverify.tlprodstore.blob.core.windows.net"
+  type    = "CNAME"
+  proxied = true
 }

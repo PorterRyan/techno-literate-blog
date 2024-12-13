@@ -11,10 +11,6 @@ resource "azurerm_storage_account" "res-1" {
   name                             = "tlprodstore"
   resource_group_name              = azurerm_resource_group.res-0.name
 
-  # custom_domain {
-  #  name = "www.techno-literate.com"
-  # }
-
   custom_domain {
     name = "www.techno-literate.com"
   }

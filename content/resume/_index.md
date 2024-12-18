@@ -22,6 +22,7 @@ Brigham Young University-Idaho | Rexburg, ID
 ---
 
 ## Professional Certifications  
+- Microsoft Certified: Azure Fundamentals | December 2024
 - TestOut Network Pro
 - TestOut PC Pro
 - TestOut Client Pro

@@ -4,3 +4,8 @@
     min = '0.90.0'
 pluralizelisttitles = false
 enableGitInfo = true
+  [[module.imports]]
+    path="https://github.com/PorterRyan/hugo-theme-terminal"
+    disable=false
+
+theme = ["termina"]

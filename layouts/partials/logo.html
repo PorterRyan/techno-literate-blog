@@ -4,6 +4,6 @@
       {{ with $.Site.Params.Logo.path }}
         {{ with resources.Get . }}
           <img src="{{ .RelPermaLink }}">
-        {{ else }}Ryan Porter
+        {{ else }}Ryan Porter{{ end }}
   </div>
 </a>

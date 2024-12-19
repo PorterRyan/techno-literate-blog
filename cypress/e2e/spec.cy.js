@@ -14,6 +14,6 @@ describe('Sitemap Test', () => {
 
 describe('CSS test', () => {
   it('should have CSS', () => {
-    cy.visit('https://www.techno-literate.com/').get('.blue').should('have.css','background-color','rgb(29, 33, 44)');
+    cy.visit('https://www.techno-literate.com/').get('.blue').should('have.css','background-color','rgb(14, 25, 35)');
   });
 });

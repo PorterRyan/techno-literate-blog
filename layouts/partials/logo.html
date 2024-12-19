@@ -3,7 +3,7 @@
     <!-- {{ with $.Site.Params.Logo.path }}{{ . }}{{ else }}Terminal{{ end }} -->
       {{ with $.Site.Params.Logo.path }}
         {{ with resources.Get . }}
-          <img src="{{ .RelPermaLink }}">
+          <img src="{{ .RelPermaLink }}">{{ end }}
         {{ else }}Ryan Porter{{ end }}
   </div>
 </a>

@@ -81,7 +81,7 @@ relativeURLs = false
 
     [languages.en.params.logo]
       # logoText = "Ryan Porter"
-      path = "static/favicon.png"
+      path = "favicon.png"
       logoHomeLink = "/"
 
     [languages.en.menu]
